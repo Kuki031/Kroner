@@ -394,16 +394,15 @@
 
         .flash__close {
             position: absolute;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            right: 5px;
-            top: 5px;
+            top: 0;
+            right: 0;
             font-size: var(--font-size-paragraphs);
             color: var(--color-tertiary);
-            background-color: inherit;
+            background: none;
             border: none;
             cursor: pointer;
+            padding: 0.5rem;
+            line-height: 1;
         }
 
         /****************************************/
