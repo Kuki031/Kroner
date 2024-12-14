@@ -404,5 +404,89 @@
             padding: 0.5rem;
             line-height: 1;
         }
+        /****************************************/
+        /*Product list*/
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            animation: 1s appear ease-in-out;
+        }
+
 
         /****************************************/
+        /*Product card*/
+        .card {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            margin: 2rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-content {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            margin: 1rem;
+            padding: 2rem;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--color-secondary);
+            border: none;
+            border-radius: 1rem;
+        }
+        .card-content__header {
+            font-size: var(--font-size-headers);
+            color: var(--color-primary);
+            align-self: flex-start;
+        }
+
+        .card-content__img {
+            width: 40rem;
+            height: 40rem;
+            border: none;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: var(--color-primary);
+            margin-top: 1rem;
+            align-self: flex-start;
+            opacity: 0.8;
+            border-radius: 1rem;
+            border:1px solid var(--color-tertiary);
+        }
+
+        .card-content__info {
+            align-self: flex-start;
+            margin-top: 1rem;
+        }
+        .card-content__info > p {
+            color: var(--color-primary);
+        }
+        .card-content__price, .card-content__available, .card-content__mf {
+            color: var(--color-tertiary);
+        }
+        .card-content__actions {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            align-self: flex-start;
+            margin-top: 2rem;
+            gap: .5rem;
+        }
+        .card-form {
+            align-self: flex-start;
+        }
+        .cart-button {
+            padding: 1rem;
+        }
+        .card-label {
+            font-size: var(--font-size-paragraphs);
+            color: var(--color-tertiary);
+        }
+        .card-input {
+            padding: 1rem;
+        }

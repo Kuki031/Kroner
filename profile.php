@@ -28,7 +28,7 @@ if (!isset($_SESSION['is_logged_in']) || !$_SESSION['is_logged_in']) {
                     <input class="edit-form__input" type="hidden" name="id" value="<?= $_SESSION['loggin_details']['id']?>">
 
                     <div class="picture__holder">
-                    <div class="profile__picture preview" style="background-image: url('<?= htmlspecialchars($_SESSION['loggin_details']['profile_picture'] ?? "uploads/fallback.png") ?>');"></div>
+                    <div class="profile__picture preview" style="background-image: url('<?= htmlspecialchars($_SESSION['loggin_details']['profile_picture'] ?? "assets/fallback.png") ?>');"></div>
                         <label for="file" class="edit-form__label">Odaberi sliku</label>
                         <input class="edit-form__input edit-form__input--file" type="file" name="file" id="file">
                     </div>

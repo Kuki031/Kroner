@@ -24,7 +24,7 @@ session_start();
             <?php else : ?>
                  <div class="list-container">
                     <div>
-                        <a href="#" class="nav__link">Popis proizvoda</a>
+                        <a href="product-list.php" class="nav__link">Popis proizvoda</a>
                         <a href="#" class="nav__link">Moja košarica</a>
                     </div>
                     <div>
