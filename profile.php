@@ -38,7 +38,7 @@ if (!isset($_SESSION['is_logged_in']) || !$_SESSION['is_logged_in']) {
                     </div>
                     <div>
                         <label for="email">E-mail:</label>
-                        <input class="edit-form__input" type="text" name="email" id="email" value="<?= $_SESSION['loggin_details']['email']?>" autocomplete="off">
+                        <input class="edit-form__input" type="email" name="email" id="email" value="<?= $_SESSION['loggin_details']['email']?>" autocomplete="off">
                     </div>
                     <div>
                         <label for="role">Uloga:</label>
@@ -60,11 +60,11 @@ if (!isset($_SESSION['is_logged_in']) || !$_SESSION['is_logged_in']) {
                     </div>
                     <div>
                         <label for="new_password">Nova lozinka:</label>
-                        <input class="edit-form__input" type="password" name="new_password" id="new_password" autocomplete="off">
+                        <input class="edit-form__input" type="password" name="new_password" id="new_password" required autocomplete="off">
                     </div>
                     <div>
                         <label for="repeat_password">Ponovi lozinku:</label>
-                        <input class="edit-form__input" type="password" name="repeat_password" id="repeat_password">
+                        <input class="edit-form__input" type="password" name="repeat_password" required autocomplete="off" id="repeat_password">
                     </div>
 
                     <input class="edit-form__input edit-form__input--button" type="submit" value="Ažuriraj lozinku" name="submit">

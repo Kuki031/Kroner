@@ -36,6 +36,10 @@ try {
     $stmt->execute($params);
     $result = $stmt->fetch();
 
+    if (!$newPassword || !$repeatNewPassword) {
+        throw new Exception("Polja nova lozinka i ponovljena nova lozinka su nužna.", 400);
+    }
+
 
     if (!$result || !comparePasswords($currentPassword, $result["password"])) {
         throw new Exception("Netočna trenutna lozinka.", 400);
