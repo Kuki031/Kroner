@@ -49,30 +49,45 @@ if ((!$_SERVER['REQUEST_METHOD'] === "POST") || !isset($_POST['submit'])) {
 
 
 function register($pdo, ...$info) {
-    [$username, $email, $password, $role] = $info;
-    $query = "INSERT INTO users (username, email, password, role_id) VALUES (:username, :email, :password, :role_id);";
-    $params = [
-        ":username" => htmlspecialchars($username),
-        ":email" => htmlspecialchars($email),
-        ":password" => password_hash($password, PASSWORD_DEFAULT),
-        ":role_id" => htmlspecialchars($role)
-    ];
+    try {
 
-    $stmt = $pdo->prepare($query);
-    $stmt->execute($params);
+        [$username, $email, $password, $role] = $info;
+        $query = "INSERT INTO users (username, email, password, role_id) VALUES (:username, :email, :password, :role_id);";
+        $params = [
+            ":username" => htmlspecialchars($username),
+            ":email" => htmlspecialchars($email),
+            ":password" => password_hash($password, PASSWORD_DEFAULT),
+            ":role_id" => htmlspecialchars($role)
+        ];
 
-    $_SESSION['flash'] = "Registracija uspješna.";
-    $_SESSION['success'] = true;
-    header("Location: index.php");
-    exit;
+        $stmt = $pdo->prepare($query);
+        $stmt->execute($params);
+
+        $_SESSION['flash'] = "Registracija uspješna.";
+        $_SESSION['success'] = true;
+        header("Location: index.php");
+        exit;
+    } catch (Exception $e) {
+        $_SESSION['flash'] = $e->getMessage();
+        $_SESSION['err'] = true;
+        header("Location: profile.php");
+        exit;
+    }
 }
 
 function fetchAssociatedRole($pdo, $name) {
-    $query = "SELECT * FROM roles WHERE name = :name;";
-    $params = [":name" => htmlspecialchars($name)];
-    $stmt = $pdo->prepare($query);
-    $stmt->execute($params);
+    try {
+        $query = "SELECT * FROM roles WHERE name = :name;";
+        $params = [":name" => htmlspecialchars($name)];
+        $stmt = $pdo->prepare($query);
+        $stmt->execute($params);
 
-    $result = $stmt->fetch();
-    return $result;
+        $result = $stmt->fetch();
+        return $result;
+    } catch (Exception $e) {
+        $_SESSION['flash'] = $e->getMessage();
+        $_SESSION['err'] = true;
+        header("Location: profile.php");
+        exit;
+    }
 }

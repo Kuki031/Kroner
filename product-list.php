@@ -10,26 +10,36 @@ if (!isset($_SESSION['is_logged_in']) || !$_SESSION['is_logged_in']) {
     exit;
 }
 
-$pdo = connectToDatabase();
+try {
+    $pdo = connectToDatabase();
 
-$pagingRes = page($pdo, "products");
-$offset = $pagingRes['offset'];
-$items_per_page = $pagingRes['items_per_page'];
-$total_pages = $pagingRes['total_pages'];
-$page = $pagingRes['page'];
+    $pagingRes = page($pdo, "products");
+    $offset = $pagingRes['offset'];
+    $items_per_page = $pagingRes['items_per_page'];
+    $total_pages = $pagingRes['total_pages'];
+    $page = $pagingRes['page'];
 
 
-$sqlQuery = 
-"SELECT p.id, p.name, p.price, p.quantity_available, p.image, p.manufacturer_id, m.name 
-AS man_name 
-FROM products AS p 
-INNER JOIN manufacturer AS m 
-ON p.manufacturer_id = m.id 
-LIMIT $offset, $items_per_page";
+    $sqlQuery = 
+    "SELECT p.id, p.name, p.price, p.quantity_available, p.image, p.manufacturer_id, m.name 
+    AS man_name 
+    FROM products AS p 
+    INNER JOIN manufacturer AS m 
+    ON p.manufacturer_id = m.id 
+    LIMIT $offset, $items_per_page";
 
-$stmt = $pdo->prepare($sqlQuery);
-$stmt->execute();
-$products = $stmt->fetchAll();
+    $stmt = $pdo->prepare($sqlQuery);
+    $stmt->execute();
+    $products = $stmt->fetchAll();
+    
+} catch (Exception $e) {
+    $_SESSION['flash'] = $e->getMessage();
+    $_SESSION['err'] = true;
+    header("Location: profile.php");
+    exit;
+}
+
+
 ?>
 
 <!DOCTYPE html>

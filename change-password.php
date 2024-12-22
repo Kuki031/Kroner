@@ -66,11 +66,18 @@ function comparePasswords($oldPassword, $currentPassword) {
 }
 
 function changePassword($newPassword, $pdo, $id) {
-    $sqlQuery = "UPDATE users SET password = :password WHERE id = :id;";
-    $params = [":password" => password_hash($newPassword, PASSWORD_DEFAULT), ":id" => htmlspecialchars($id)];
-    $stmt = $pdo->prepare($sqlQuery);
-    $stmt->execute($params);
-    
-    $_SESSION['flash'] = "Lozinka uspješno promjenjena.";
-    $_SESSION['success'] = true;
+    try {
+        $sqlQuery = "UPDATE users SET password = :password WHERE id = :id;";
+        $params = [":password" => password_hash($newPassword, PASSWORD_DEFAULT), ":id" => htmlspecialchars($id)];
+        $stmt = $pdo->prepare($sqlQuery);
+        $stmt->execute($params);
+        
+        $_SESSION['flash'] = "Lozinka uspješno promjenjena.";
+        $_SESSION['success'] = true;
+    } catch (Exception $e) {
+        $_SESSION['flash'] = $e->getMessage();
+        $_SESSION['err'] = true;
+        header("Location: profile.php");
+        exit;
+    }
 }

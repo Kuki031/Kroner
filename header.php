@@ -6,14 +6,22 @@ session_start();
 function checkNumberOfItems()
 {
     loadFile("database/database.php");
-    $pdo = connectToDatabase();
-    $userId = $_SESSION['loggin_details']['id'];
-    $sqlQuery = "SELECT COUNT(*) AS item_count FROM shopping_cart WHERE user_id = :id;";
-    $stmt = $pdo->prepare($sqlQuery);
-    $stmt->execute([":id" => $userId]);
-
-    $res = $stmt->fetch();
-    return $res['item_count'];
+    try {
+        $pdo = connectToDatabase();
+        $userId = $_SESSION['loggin_details']['id'];
+        $sqlQuery = "SELECT COUNT(*) AS item_count FROM shopping_cart WHERE user_id = :id;";
+        $stmt = $pdo->prepare($sqlQuery);
+        $stmt->execute([":id" => $userId]);
+    
+        $res = $stmt->fetch();
+        return $res['item_count'];
+        
+    } catch (Exception $e) {
+        $_SESSION['flash'] = $e->getMessage();
+        $_SESSION['err'] = true;
+        header("Location: profile.php");
+        exit;
+    }
 }
 
 ?>

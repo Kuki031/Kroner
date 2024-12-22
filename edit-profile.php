@@ -19,10 +19,10 @@ if (!$id) {
     exit;
 }
 
-$pdo = connectToDatabase();
 
 try {
-
+    
+    $pdo = connectToDatabase();
     $username = trim($_POST['username']) ?? '';
     $email = trim($_POST['email']) ?? '';
 
@@ -52,22 +52,29 @@ try {
 
 function refreshSession($pdo, $id)
 {
-    $sqlQuery = "SELECT u.id, u.username, u.email, u.password, u.profile_picture, u.role_id, name FROM users AS u INNER JOIN roles AS r ON u.role_id = r.id WHERE u.id = :id";
-    $stmt = $pdo->prepare($sqlQuery);
-    $params = [":id" => htmlspecialchars($id)];
-    $stmt->execute($params);
-    $res = $stmt->fetch();
+    try {
+        $sqlQuery = "SELECT u.id, u.username, u.email, u.password, u.profile_picture, u.role_id, name FROM users AS u INNER JOIN roles AS r ON u.role_id = r.id WHERE u.id = :id";
+        $stmt = $pdo->prepare($sqlQuery);
+        $params = [":id" => htmlspecialchars($id)];
+        $stmt->execute($params);
+        $res = $stmt->fetch();
 
-    $_SESSION['loggin_details'] = [
-        "id" => $res['id'],
-        "username" => $res['username'],
-        "email" => $res['email'],
-        "profile_picture" => $res['profile_picture'],
-        "role" => $res['name']
-    ];
+        $_SESSION['loggin_details'] = [
+            "id" => $res['id'],
+            "username" => $res['username'],
+            "email" => $res['email'],
+            "profile_picture" => $res['profile_picture'],
+            "role" => $res['name']
+        ];
 
-    $_SESSION['flash'] = "Profil uspješno ažuriran.";
-    $_SESSION['success'] = true;
-    header("Location: profile.php");
-    exit;
+        $_SESSION['flash'] = "Profil uspješno ažuriran.";
+        $_SESSION['success'] = true;
+        header("Location: profile.php");
+        exit;
+    } catch (Exception $e) {
+        $_SESSION['flash'] = $e->getMessage();
+        $_SESSION['err'] = true;
+        header("Location: profile.php");
+        exit;
+    }
 }

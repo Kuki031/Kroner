@@ -52,27 +52,44 @@ if ($result) {
 
 function checkCart($pdo, $userId, $productId)
 {
-    $sqlQuery = "SELECT * FROM shopping_cart WHERE user_id = :user_id AND product_id = :product_id;";
-    $stmt = $pdo->prepare($sqlQuery);
-    $stmt->execute([":user_id" => $userId, ":product_id" => $productId]);
-    $result = $stmt->fetch();
+    try {
+        $sqlQuery = "SELECT * FROM shopping_cart WHERE user_id = :user_id AND product_id = :product_id;";
+        $stmt = $pdo->prepare($sqlQuery);
+        $stmt->execute([":user_id" => $userId, ":product_id" => $productId]);
+        $result = $stmt->fetch();
 
-    return $result;
+        return $result;
+
+    } catch (Exception $e) {
+        $_SESSION['flash'] = $e->getMessage();
+        $_SESSION['err'] = true;
+    
+        header("Location: product-list.php");
+        exit;
+    }
 }
 
 
 function checkAvailability($pdo, $productId, $qty)
 {
-    $checkIfAvailableQuery = "SELECT quantity_available FROM products WHERE id = :product_id;";
-    $stmt = $pdo->prepare($checkIfAvailableQuery);
-    $stmt->execute([":product_id" => $productId]);
-
-    $result = $stmt->fetch();
-
-    return [
-        "is_available" => $result['quantity_available'] <= 0 ? false : true,
-        "is_greater" => $qty > $result['quantity_available'] ? false : true
-    ];
+    try {
+        $checkIfAvailableQuery = "SELECT quantity_available FROM products WHERE id = :product_id;";
+        $stmt = $pdo->prepare($checkIfAvailableQuery);
+        $stmt->execute([":product_id" => $productId]);
+    
+        $result = $stmt->fetch();
+    
+        return [
+            "is_available" => $result['quantity_available'] <= 0 ? false : true,
+            "is_greater" => $qty > $result['quantity_available'] ? false : true
+        ];
+    } catch (Exception $e) {
+        $_SESSION['flash'] = $e->getMessage();
+        $_SESSION['err'] = true;
+    
+        header("Location: product-list.php");
+        exit;
+    }
 }
 
 
@@ -113,20 +130,6 @@ function updateCart($userId, $productId, $qty, $pdo)
 
 function addToCart($userId, $productId, $qty, $pdo)
 {
-
-    $checkIfAvailableQuery = "SELECT quantity_available FROM products WHERE id = :product_id;";
-    $stmt = $pdo->prepare($checkIfAvailableQuery);
-    $stmt->execute([":product_id" => $productId]);
-
-    $result = $stmt->fetch();
-
-    if ($result['quantity_available'] <= 0) {
-        $_SESSION['flash'] = "Proizvod je trenutno rasprodan.";
-        $_SESSION['err'] = true;
-
-        header("Location: product-list.php");
-        exit;
-    }
 
     try {
 
