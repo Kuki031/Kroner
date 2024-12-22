@@ -19,6 +19,8 @@
             --color-admin: red;
             --color-err: rgba(201, 31, 31, 0.829);
             --color-success: rgba(14, 207, 14, 0.808);
+            --color-disabled: rgba(128, 128, 128, 0.589);
+            --color-soldout: rgba(231, 25, 66, 0.788);
         }
 
         body {
@@ -76,6 +78,9 @@
             transition: all .2s;
             margin: 1rem;
             align-self: flex-start;
+        }
+        .nav__link--logout {
+            align-self: flex-end;
         }
         .nav__link:hover {
             color: var(--color-tertiary);
@@ -480,12 +485,12 @@
         .card-form {
             align-self: flex-start;
         }
-        .cart-button {
-            padding: 1rem;
-        }
         .card-label {
             font-size: var(--font-size-paragraphs);
             color: var(--color-tertiary);
+        }
+        .cart-button {
+            padding: 1rem;
         }
         .card-input {
             padding: 1rem;
@@ -527,4 +532,17 @@
             color: var(--color-tertiary);
         }
 
+
         /****************************************/
+        /*Shopping cart*/
+        .disabled-cart {
+            background-color: var(--color-disabled);
+        }
+
+        .sold-out {
+            background-color: var(--color-soldout)
+        }
+
+        .item-count {
+            color: var(--color-admin);
+        }
