@@ -11,6 +11,7 @@ if (!isset($_SESSION['is_logged_in']) || !$_SESSION['is_logged_in']) {
 }
 
 try {
+    
     $pdo = connectToDatabase();
 
     $pagingRes = page($pdo, "products");
@@ -76,11 +77,7 @@ try {
                     </p>
                     <p>
                     Raspoloživo:
-                    <?php if ($product['quantity_available'] > 0): ?>
                         <span class="card-content__available"><?= $product['quantity_available']?> kom.</span>
-                        <?php else: ?>
-                            <span class="card-content__available">❌</span>
-                        <?php endif; ?>
                     </p>
                 </div>
                 <?php if($product['quantity_available'] > 0): ?>

@@ -10,6 +10,7 @@
         :root {
             --color-primary: #FEE715;
             --color-secondary: #101820de;
+            --color-secondary-dark: #101820f5;
             --color-tertiary: #fff;
             --color-bg: #FDF1B8;
             --font-size-headers: 2.5rem;
@@ -546,3 +547,66 @@
         .item-count {
             color: var(--color-admin);
         }
+
+        .cart-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            flex-direction: column;
+            margin: 2rem;
+        }
+
+        .table-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            flex-direction: column;
+            margin: 1rem;
+            animation: 1s appear ease-in-out;
+        }
+
+        .table-container__head {
+            font-size: var(--font-size-headers);
+            color: var(--color-primary);
+            align-self: flex-start;
+            margin-bottom: 2rem;
+        }
+
+        .table-container__total {
+            font-size: var(--font-size-paragraphs);
+            color: var(--color-primary);
+            align-self: flex-end;
+        }
+
+        .total-div {
+            align-self:flex-end;
+            padding: 1rem;
+            background-color: var(--color-secondary-dark);
+            border: 2px solid var(--color-tertiary);
+        }
+        .table-container__table {            
+            background-color: var(--color-secondary-dark);
+            color: var(--color-primary);
+            border-collapse: collapse;
+        }
+        .table-container__table thead tr{
+            border-bottom: 2px solid var(--color-tertiary);
+        }
+        .table-container__table thead th{
+            padding: 2rem;
+        }
+
+        .table-container__table td {
+            padding: 2rem;
+        }
+
+        .table-container__table tr td {
+            border-bottom: 2px solid var(--color-tertiary);
+        }
+
+        .table-container__table tr:last-child td {
+            border-bottom: none;
+        }
+        

@@ -46,7 +46,7 @@ function checkNumberOfItems()
                  <div class="list-container">
                     <div>
                         <a href="product-list.php?page=1" class="nav__link">Popis proizvoda</a>
-                        <a href="#" class="nav__link">Moja košarica (<span class="item-count"><?php echo checkNumberOfItems();?></span>)</a>
+                        <a href="cart-items.php" class="nav__link">Moja košarica (<span class="item-count"><?php echo checkNumberOfItems();?></span>)</a>
                     </div>
                     <div>
                         <a href="profile.php" class="nav__link">Moj profil (<span style="<?= $_SESSION['loggin_details']['role'] === 'guest' ? "color:var(--color-guest);" : "color:var(--color-admin);" ?>"><?= $_SESSION['loggin_details']['username']?></span>)</a>
