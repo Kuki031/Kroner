@@ -24,6 +24,13 @@ function checkNumberOfItems()
     }
 }
 
+$numOfItems = null;
+
+if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'])
+{
+    $numOfItems = checkNumberOfItems();
+}
+
 ?>
 
 <head>
@@ -46,10 +53,17 @@ function checkNumberOfItems()
                  <div class="list-container">
                     <div>
                         <a href="product-list.php?page=1" class="nav__link">Popis proizvoda</a>
-                        <a href="cart-items.php" class="nav__link">Moja košarica (<span class="item-count"><?php echo checkNumberOfItems();?></span>)</a>
+                        <div class="item-count__holder">
+                            <a href="cart-items.php" class="nav__link">Moja košarica</a>
+                            <?php if($numOfItems > 0): ?>
+                                <div class="item-count">
+                                    <span><?= $numOfItems?></span>
+                                </div>
+                                <?php endif; ?>
+                        </div>
                     </div>
                     <div>
-                        <a href="profile.php" class="nav__link">Moj profil (<span style="<?= $_SESSION['loggin_details']['role'] === 'guest' ? "color:var(--color-guest);" : "color:var(--color-admin);" ?>"><?= $_SESSION['loggin_details']['username']?></span>)</a>
+                        <a href="profile.php" class="nav__link">Moj profil</a>
                         <a href="logout.php" class="nav__link nav__link--logout">Odjava</a>
                     </div>
                  </div>

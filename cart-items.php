@@ -43,10 +43,12 @@ try {
 
     $result = $stmt->fetchAll();
     $totalPrice = 0;
+    $totalQuantity = 0;
 
     for($i = 0 ; $i < sizeof($result) ; $i++)
     {
         $totalPrice += $result[$i]['total_price_per_product'];
+        $totalQuantity += $result[$i]['quantity_added'];
     }
 
 } catch (Exception $e) {
@@ -104,10 +106,20 @@ try {
                         </tr>
                         <?php endforeach; ?>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td>Ukupno:</td>
+                        <td>-</td>
+                        <td class="total-d"><?= $totalQuantity?> kom.</td>
+                        <td class="total-d"><?= $totalPrice?> €</td>
+                        <td>
+                            <form action="#" method="#">
+                            <input class="edit-form__input edit-form__input--button checkout" type="submit" value="Završi kupnju" name="checkout">
+                            </form>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
-            <div class="total-div">
-                <p class="table-container__total">Ukupno: <span><?= $totalPrice?></span> €</p>
-            </div>
         </div>
     </div>
         <?php endif; ?>
