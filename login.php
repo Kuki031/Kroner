@@ -37,6 +37,10 @@ if (($_SERVER['REQUEST_METHOD'] !== "POST") || !isset($_POST['submit'])) {
             "profile_picture" => $result['profile_picture'],
             "role" => $result['name']
         ];
+
+        $_SESSION['flash'] = "Prijava uspješna.";
+        $_SESSION['success'] = true;
+
         header("Location: index.php");
         exit;
     

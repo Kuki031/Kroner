@@ -56,7 +56,7 @@ if (!isset($_SESSION['is_logged_in']) || !$_SESSION['is_logged_in']) {
                     <input class="edit-form__input" type="hidden" name="id" value="<?= $_SESSION['loggin_details']['id']?>">
                     <div>
                         <label for="current_password">Trenutna lozinka:</label>
-                        <input class="edit-form__input" type="password" name="current_password" id="current_password" autocomplete="off">
+                        <input class="edit-form__input" type="password" name="current_password" id="current_password" required autocomplete="off">
                     </div>
                     <div>
                         <label for="new_password">Nova lozinka:</label>

@@ -112,19 +112,6 @@
             gap: 1rem;
         }
 
-        .action__buttons .nav__link {
-            font-size: 1rem;
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--color-primary);
-            border-radius: 4px;
-            transition: background-color 0.2s;
-        }
-
-        .action__buttons .nav__link:hover {
-            background-color: var(--color-primary);
-            color: #fff;
-        }
-
         .item-count__holder {
             position: relative;
             display: inline-block;
@@ -139,7 +126,29 @@
             font-size: 1.5rem;
             font-weight: bold;
             padding: 0.3rem 0.5rem;
+            animation: jump 1s ease-in-out infinite;
+            border-radius: 25px;
+            transition: all .2s;
         }
+        
+        @keyframes jump {
+            0% {
+                transform: translateY(0)
+            }
+            25% {
+                transform: translateY(-5px)
+            }
+            50% {
+                transform: translateY(-5px)
+            }
+            75% {
+                transform: translateY(-5px)
+            }
+            100% {
+                transform: translateY(0)
+            }
+        }
+        
 
         @media screen and (max-width: 768px) {
             .nav {

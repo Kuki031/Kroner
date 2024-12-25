@@ -113,7 +113,7 @@ try {
                         <td class="total-d"><?= $totalQuantity?> kom.</td>
                         <td class="total-d"><?= $totalPrice?> €</td>
                         <td>
-                            <form action="#" method="#">
+                            <form action="checkout.php" method="post">
                             <input class="edit-form__input edit-form__input--button checkout" type="submit" value="Završi kupnju" name="checkout">
                             </form>
                         </td>
