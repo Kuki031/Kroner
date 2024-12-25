@@ -64,6 +64,9 @@ if (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in'])
                     </div>
                     <div>
                         <a href="profile.php" class="nav__link">Moj profil</a>
+                        <?php if($_SESSION['loggin_details']['role'] === 'administrator'): ?>
+                            <a href="dashboard.php" class="nav__link">Upravljačka ploča</a>
+                            <?php endif; ?>
                         <a href="logout.php" class="nav__link nav__link--logout">Odjava</a>
                     </div>
                  </div>
