@@ -30,7 +30,7 @@ if (!isset($_SESSION['is_logged_in']) || !$_SESSION['is_logged_in'] || $_SESSION
                 <a href="product-list-admin.php" class="dashboard__links">Popis proizvoda</a>
             </div>
             <div>
-                <a href="#" class="dashboard__links">Popis korisnika</a>
+                <a href="users-list.php" class="dashboard__links">Popis korisnika</a>
             </div>
         </div>
     </div>

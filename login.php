@@ -13,7 +13,7 @@ if (($_SERVER['REQUEST_METHOD'] !== "POST") || !isset($_POST['submit'])) {
         $usernameOrEmail = trim($_POST['username-email']) ?? '';
         $password = $_POST['password'] ?? '';
 
-        $query = "SELECT u.id, u.username, u.email, u.password, u.profile_picture, u.role_id, name FROM users AS u INNER JOIN roles AS r ON u.role_id = r.id WHERE u.username = :username OR u.email = :email;";
+        $query = "SELECT u.id, u.username, u.email, u.password, u.profile_picture, u.is_banned, u.role_id, name FROM users AS u INNER JOIN roles AS r ON u.role_id = r.id WHERE u.username = :username OR u.email = :email;";
         
         
         $params = [
@@ -26,6 +26,10 @@ if (($_SERVER['REQUEST_METHOD'] !== "POST") || !isset($_POST['submit'])) {
 
         if (!$result || !password_verify($password, $result['password'])) {
             throw new Exception("Netočna lozinka ili korisničko ime ili e-mail.");
+        }
+
+        if ($result['is_banned']) {
+            throw new Exception("Ne možete pristupiti aplikaciji.");
         }
 
         session_start();

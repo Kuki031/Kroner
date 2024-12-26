@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS users (
     username VARCHAR(255) NOT NULL UNIQUE,
     email VARCHAR(70) NOT NULL UNIQUE,
     password CHAR(64) NOT NULL,
+    is_banned TINYINT DEFAULT 0,
     profile_picture VARCHAR(255) NULL,
     role_id INT NOT NULL
 );
