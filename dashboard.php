@@ -25,11 +25,9 @@ if (!isset($_SESSION['is_logged_in']) || !$_SESSION['is_logged_in'] || $_SESSION
         <div class="dashboard-options">
             <div>
                 <a href="manufacturers-list.php" class="dashboard__links">Popis proizvođača</a>
-                <a href="#" class="dashboard__links">Kreiraj novog proizvođača</a>
             </div>
             <div>
-                <a href="#" class="dashboard__links">Popis proizvoda</a>
-                <a href="#" class="dashboard__links">Kreiraj novi proizvod</a>
+                <a href="product-list-admin.php" class="dashboard__links">Popis proizvoda</a>
             </div>
             <div>
                 <a href="#" class="dashboard__links">Popis korisnika</a>

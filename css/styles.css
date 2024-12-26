@@ -841,7 +841,9 @@
 
         .form-holder-wrap input[type="text"],
         .form-holder-wrap input[type="file"],
-        .form-holder-wrap input[type="submit"] {
+        .form-holder-wrap input[type="submit"],
+        .form-holder-wrap select,
+        .form-holder-wrap select option {
             padding: 12px;
             font-size: 1.5rem;
             border: 1px solid var(--color-secondary-dark);
