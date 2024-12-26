@@ -58,6 +58,12 @@ try {
     exit;
 }
 
+function discountTotal($total, $discount)
+{
+    $total -= ($total * ($discount / 100));
+    return $total;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -111,7 +117,11 @@ try {
                         <td>Ukupno:</td>
                         <td>-</td>
                         <td class="total-d"><?= $totalQuantity?> kom.</td>
-                        <td class="total-d"><?= $totalPrice?> €</td>
+                        <?php if($totalPrice < 100): ?>
+                            <td class="total-d"><?= $totalPrice ?> €</td>
+                            <?php else: ?>
+                                <td class="total-d">Popust (<?= date("d")?>%) <br> <s><?= $totalPrice?></s> € <br><?= round(discountTotal($totalPrice, (int) date("d")), 2)?> €</td>
+                            <?php endif; ?>
                         <td>
                             <form action="checkout.php" method="post">
                             <input class="edit-form__input edit-form__input--button checkout" type="submit" value="Završi kupnju" name="checkout">
